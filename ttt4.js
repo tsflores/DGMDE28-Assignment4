@@ -1,6 +1,11 @@
-// Javascript code to test functionality of the tic-tac-toe game
+/*JavaScript code that will
+  1.  Randomly select a starting player for the game
+  2.  Place an X or an O on a selected square based on the correct identification of a player's turn
+  3.  Alert the player on whose turn it is
+  4.  Alert the player if a square is already taken
+*/
 
-
+//execute once the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
 
     const tttSquares = document.getElementsByClassName("square"); //get all div's with a class name of square
