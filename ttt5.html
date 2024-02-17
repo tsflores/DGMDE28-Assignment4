@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe v2</title>
+    <!-- use external JavaScript file for playing the game -->
+    <script src="ttt5.js"></script> 
+
+
+    <style type="text/css">
+        body {
+            margin: 100px;
+        }
+
+        /* style for title above the grid */
+        h1 {
+            text-align: center;
+            font-size: 4rem;
+            color: #3E63E6;
+            font-weight: 700;
+            margin: 0;
+            padding-bottom: 2rem;
+        }
+
+        /* container on the page that serves as a 3x3 grid */
+        .wrapper {
+            display: grid;
+            grid-template-columns: 150px 150px 150px;
+            grid-gap: 10px;
+            justify-content: center;
+        }
+
+        /* style each square with a border and center align any text within it */
+        .square {
+            display: flex;
+            width: 150px;
+            height: 150px;
+            border: solid 1px black;
+            border-radius: 25px;
+            justify-content: center;
+            align-items: center;
+            font-size: 80px;
+            font-family: 'Calibri' sans-serif;
+        }
+
+        /* change color of square and text when hovering over it */
+        .square:hover {
+            background-color: #3E63E6;
+            color: #FFF;
+        }
+
+        /* style the players turn and game status to center on page and apply a border */
+        #turn {
+            grid-row-start: 4;
+            color: #3E63E6;
+        }
+
+        #gameStatus {
+            grid-row-start: 5;
+            color: black;
+        }
+
+        #gameStatus:hover {
+            background-color: rgb(223, 232, 95);
+            cursor: pointer;
+        }
+
+        #turn,
+        #gameStatus {
+            grid-column-end: span 3;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+            width: 350px;
+            border: solid 1px black;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1> Tic-Tac-Toe </h1>
+    </header>
+    <div class="wrapper">
+        <!-- JavaScript to create 9 div elements on the page with class and ID and an event listener for each square -->
+        <script>
+            const NUM_SQUARES = 9;
+            for (i = 0; i < NUM_SQUARES; i++) {
+                id = "sq" + i;
+                document.write("<div class='square' id='" + id + "'></div>");
+            }
+            // Adjusted div's from assignment 1 to fall within the wrapper and get created by JavaScript 
+            document.write("<div id='turn'> Its Xs Turn</div> </br>");
+            document.write("<div id='gameStatus'> Start Game </div>");
+        </script>
+    </div>
+</body>
+
+</html>
