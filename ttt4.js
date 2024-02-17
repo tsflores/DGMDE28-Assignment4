@@ -1,8 +1,6 @@
 // Javascript code to test functionality of the tic-tac-toe game
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const tttSquares = document.getElementsByClassName("square"); //get all div's with a class name of square
