@@ -3,6 +3,8 @@
   2.  Place an X or an O on a selected square based on the correct identification of a player's turn
   3.  Alert the player on whose turn it is
   4.  Alert the player if a square is already taken
+  5.  Determine whether a winner occurs or if game is a stalemate
+  6.  Allow the player to restart the game
 */
 
 //execute once the DOM is loaded
@@ -12,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentPlayer;
     const playerTurn = document.getElementById("turn");  //variable to change text alerting user of turn
     const btn = document.getElementById("gameStatus");
+    var array = ['sq0', 'sq1', 'sq2', 'sq3', 'sq4', 'sq5', 'sq6', 'sq7', 'sq8'];
+    options = "OX".split('');
 
     startGame();
 
@@ -20,25 +24,26 @@ document.addEventListener("DOMContentLoaded", function () {
         startGame();
     });
 
-    // loop through the squares and execute if else block following a 'click'
+    // loop through the squares and execute following a 'click'
     for (let i = 0; i < tttSquares.length; i++) {
         tttSquares[i].addEventListener("click", function () {
 
-            theSquareID = this.id;
-            selectedSquare = document.getElementById(theSquareID);
+            selectedSquare = document.getElementById(this.id);
 
             // conditional statement to make sure a square doesn't already have an X or an O
             if (selectedSquare.textContent == '') {
+                selectedSquare.innerHTML = currentPlayer;
                 if (currentPlayer == "O") {
-                    selectedSquare.innerHTML = 'O';
-                    currentPlayer = "X";
                     playerTurn.innerText = "It's X's Turn";
                 }
                 else {
-                    selectedSquare.innerHTML = 'X';
-                    currentPlayer = "O";
                     playerTurn.innerText = "It's O's Turn";
                 }
+                currentPlayer = (currentPlayer == "X") ? "O" : "X"; //conditional statement to select next player
+
+                mapContents();
+
+                console.log(contents);
             }
             else {
                 alert("Square " + (i + 1) + " is taken and no longer available for play!"); //reference square number from index i in for loop
@@ -46,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
+    // (re)starts game and randomly picks first player
     function startGame() {
         currentPlayer = Math.random() > 0.5 ? "X" : "O"; //conditional statement to select the starting player at random
 
@@ -56,6 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             playerTurn.innerText = "X Starts the Game";
         }
-    }
+    };
+
+    //create new array that shows all of the selections made on the game board
+    function mapContents() {
+        contents = array.map(function (id) {
+            if (options.includes(document.getElementById(id).innerHTML)) {
+                return document.getElementById(id).innerHTML;
+            }
+            else {
+                return "-"; //if no X or O, replace with a -
+            }
+        });
+        contents = contents.join("");
+    };
 
 });
