@@ -32,21 +32,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // conditional statement to make sure a square doesn't already have an X or an O
             if (selectedSquare.textContent == '') {
+
                 selectedSquare.innerHTML = currentPlayer;
-                if (currentPlayer == "O") {
-                    playerTurn.innerText = "It's X's Turn";
-                }
-                else {
-                    playerTurn.innerText = "It's O's Turn";
-                }
+                playerTurn.innerText = (currentPlayer == "O") ? "It's X's Turn" : "It's O's Turn";
                 currentPlayer = (currentPlayer == "X") ? "O" : "X"; //conditional statement to select next player
-
                 mapContents();
-
-                console.log(contents);
             }
             else {
                 alert("Square " + (i + 1) + " is taken and no longer available for play!"); //reference square number from index i in for loop
+            }
+
+            if (checkStalemate(contents)) {
+                playerTurn.innerText = "Stalemate - no winner";
             }
         });
     };
@@ -77,4 +74,18 @@ document.addEventListener("DOMContentLoaded", function () {
         contents = contents.join("");
     };
 
+    //checks to see if any '-' still exist in the board array
+    function checkStalemate(outcome) {
+        count = 0;
+        outcome = outcome.split('');
+        outcome.forEach(function (letter) {
+            if (options.includes(letter)) {
+                count++;
+            }
+        })
+        //if count = 9, board has no hyphens and game is a draw
+        if (count == 9) {
+            return true;
+        }
+    }
 });
