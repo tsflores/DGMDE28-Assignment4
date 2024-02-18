@@ -33,17 +33,25 @@ document.addEventListener("DOMContentLoaded", function () {
             // conditional statement to make sure a square doesn't already have an X or an O
             if (selectedSquare.textContent == '') {
 
+                // use a set o conditional statements to make selections for next player, color, etc...
+                selectedSquare.style.color = (currentPlayer == "O") ? "red" : "black";
                 selectedSquare.innerHTML = currentPlayer;
                 playerTurn.innerText = (currentPlayer == "O") ? "It's X's Turn" : "It's O's Turn";
-                currentPlayer = (currentPlayer == "X") ? "O" : "X"; //conditional statement to select next player
+                currentPlayer = (currentPlayer == "X") ? "O" : "X";
+                
                 mapContents();
+            }
+            else if (checkStalemate(contents)) {
+                alert("Game Over:  Please select Start Game if you wish to play again");
             }
             else {
                 alert("Square " + (i + 1) + " is taken and no longer available for play!"); //reference square number from index i in for loop
             }
 
             if (checkStalemate(contents)) {
-                playerTurn.innerText = "Stalemate - no winner";
+                playerTurn.innerText = "Outcome: Stalemate";
+                playerTurn.style.color = '#7629DC';
+                playerTurn.style.backgroundColor = "#D6B409";
             }
         });
     };
@@ -51,7 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // (re)starts game and randomly picks first player
     function startGame() {
         currentPlayer = Math.random() > 0.5 ? "X" : "O"; //conditional statement to select the starting player at random
-
+        playerTurn.style.color = "#3E63E6";
+        playerTurn.style.backgroundColor = "white";
         // Set the initial text to indicate who starts the game based on the currentPlayer
         if (currentPlayer == "O") {
             playerTurn.innerText = "O Starts the Game";
