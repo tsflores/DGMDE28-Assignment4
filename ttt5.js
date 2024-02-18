@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // conditional statement to make sure a square doesn't already have an X or an O
             if (selectedSquare.textContent == '') {
 
-                // use a set o conditional statements to make selections for next player, color, etc...
+                // use a set of conditional statements to make selections for next player, color, etc...
                 selectedSquare.style.color = (currentPlayer == "O") ? "red" : "black";
                 selectedSquare.innerHTML = currentPlayer;
                 playerTurn.innerText = (currentPlayer == "O") ? "It's X's Turn" : "It's O's Turn";
@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 mapContents();
             }
-            else if (checkStalemate(contents)) {
+            else if (checkStalemate(moves)) {
                 alert("Game Over:  Please select Start Game if you wish to play again");
             }
             else {
                 alert("Square " + (i + 1) + " is taken and no longer available for play!"); //reference square number from index i in for loop
             }
 
-            if (checkStalemate(contents)) {
+            if (checkStalemate(moves)) {
                 playerTurn.innerText = "Outcome: Stalemate";
                 playerTurn.style.color = '#7629DC';
                 playerTurn.style.backgroundColor = "#D6B409";
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //create new array that shows all of the selections made on the game board
     function mapContents() {
-        contents = array.map(function (id) {
+        moves = array.map(function (id) {
             if (options.includes(document.getElementById(id).innerHTML)) {
                 return document.getElementById(id).innerHTML;
             }
@@ -80,13 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 return "-"; //if no X or O, replace with a -
             }
         });
-        contents = contents.join("");
+        // moves = moves.join("");
     };
 
     //checks to see if any '-' still exist in the board array
     function checkStalemate(outcome) {
         count = 0;
-        outcome = outcome.split('');
+        // outcome = outcome.split('');
         outcome.forEach(function (letter) {
             if (options.includes(letter)) {
                 count++;
@@ -97,4 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return true;
         }
     }
+
+    function checkWinner() {
+
+    };
 });
