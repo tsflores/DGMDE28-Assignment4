@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const btn = document.getElementById("gameStatus");
     var array = ['sq0', 'sq1', 'sq2', 'sq3', 'sq4', 'sq5', 'sq6', 'sq7', 'sq8'];
     options = "OX".split('');
+    var moves = [];
+    var winConditions = [ ];
 
     startGame();
 
@@ -40,6 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentPlayer = (currentPlayer == "X") ? "O" : "X";
                 
                 mapContents();
+                checkWinner(moves);
+                console.log(winConditions);
             }
             else if (checkStalemate(moves)) {
                 alert("Game Over:  Please select Start Game if you wish to play again");
@@ -98,7 +102,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function checkWinner() {
+    function checkWinner(currentBoard) {
+        var dummy ="";
+        for(i = 0; i<3; i++) {
+            for (j = 0; j<3; j++) {
+           dummy = dummy + currentBoard[i+j];
+           console.log(dummy);
+        }
+        winConditions[i] = dummy;
+    }
 
     };
 });
