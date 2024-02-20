@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             playerTurn.innerText = "X Starts the Game";
         }
+        winStatus = false;
     };
 
     //create new array that shows all of the selections made on the game board
